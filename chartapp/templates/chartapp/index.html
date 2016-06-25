@@ -1,0 +1,62 @@
+<html>
+  <head>
+     <meta charset="UTF-8"> 
+    <script type="text/javascript" src="https://www.gstatic.com/charts/loader.js"></script>
+    <script type="text/javascript" src="https://www.google.com/jsapi"></script>
+	<script type="text/javascript" src="http://ajax.googleapis.com/ajax/libs/jquery/1.10.2/jquery.min.js"></script>
+    <script type="text/javascript">
+      google.charts.load('current', {'packages':['geochart']});
+      google.charts.setOnLoadCallback(drawRegionsMap);
+
+      function drawRegionsMap() {
+        
+        var datac =new google.visualization.DataTable();
+        //datac.addColumn('string', 'Country', 'Country');
+        datac.addColumn('string', 'State', 'State');
+        //datac.addColumn('string', 'Reference', 'Reference');
+        datac.addColumn('number', 'id', 'id');
+        /*
+        var rows=[['US-IL', 200],
+                  ['US-IN', 300],
+                  ['US-IA', 20],
+                  ['US-RI', 150]]; 
+        datac.addRows(rows);
+        
+          */  
+          //console.log("{{r}}");   
+        {% for ri in r %}          
+          datac.addRow(["{{ri.state}}",{{ri.idf}}]);
+          console.log("{{ri.state}}");
+        {% endfor %}
+        //console.log(datac);
+        
+
+        /*
+        var datac =new google.visualization.DataTable([
+                  ['State','Foo Factor'],
+                  ['US-IL', 200],
+                  ['US-IN', 300],
+                  ['US-IA', 20],
+                  ['US-RI', 150]
+                ]);
+	      
+        var datac =new google.visualization.DataTable([
+          ['Country','State','Reference'],
+          {%for r in response %}
+          [new {{r.country}},{{r.state}},{{r.reference}}],
+          {% endfor %}]
+          );
+        console.log(datac);
+        */
+        
+
+        var chart = new google.visualization.GeoChart(document.getElementById('regions_div'));
+
+        chart.draw(datac,{width: 556, height: 347, region: "US",displayMode: 'regions', resolution: "provinces"});
+      }
+    </script>
+  </head>
+  <body>
+    <div id="regions_div" style="width: 900px; height: 500px;"></div>
+  </body>
+</html>
