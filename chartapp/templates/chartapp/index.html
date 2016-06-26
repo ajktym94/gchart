@@ -14,7 +14,7 @@
         //datac.addColumn('string', 'Country', 'Country');
         datac.addColumn('string', 'State', 'State');
         //datac.addColumn('string', 'Reference', 'Reference');
-        datac.addColumn('number', 'id', 'id');
+        datac.addColumn('number', 'No. of Orders', 'count');
         /*
         var rows=[['US-IL', 200],
                   ['US-IN', 300],
@@ -23,10 +23,13 @@
         datac.addRows(rows);
         
           */  
-          //console.log("{{r}}");   
-        {% for ri in r %}          
-          datac.addRow(["{{ri.state}}",{{ri.idf}}]);
-          console.log("{{ri.state}}");
+          //console.log("{{r}}"); 
+          var temp="{{c}}";
+
+          console.log(temp); 
+        {% for ri in c %}          
+          datac.addRow(["{{ri.sname}}",{{ri.scount}}]);
+          //console.log("{{ri.scount}}");
         {% endfor %}
         //console.log(datac);
         
